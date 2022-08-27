@@ -1,0 +1,57 @@
+*{
+    padding: 1px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header-container{
+    display: flex;
+    justify-content: center;
+}
+
+.left-header-image{
+    width: 75%;
+}
+
+.left-header-image img{
+    height: 679px;
+    width: 100%;
+    padding-left: 3px;
+}
+
+
+
+.right-header-image{
+    padding-left: 5px;
+    width: 27%;
+}
+
+.clothes-information{
+    text-align: center;
+}
+
+.clothes-information h3, h2{
+    color: #212a31;
+}
+
+.clothes-information button{
+    background-color: #99c8cd;
+    color: white;
+    border: none;
+    width: 100px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.packet-information{
+    width: 502px;
+    padding-top: 20px;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
