@@ -8,6 +8,22 @@
     <title>Online-Marketing</title>
 </head>
 <body>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <div id="show-order">
+           
+          </div>
+        </div>
+      
+      </div>
+
+     <div class="shopping-basket" onclick="createOrder()">
+        <img src="./online-marketing-images/basket-shopping-solid.svg" class="shopping-basket-icon" id="btn-modal">
+        <span id="shopping-basket-count" class="shopping-basket-count"></span>
+    </div> 
     <header class="header-container">
         <div class="left-header-image">
             <img src="./online-marketing-images/main.avif" alt="header-image">
@@ -28,6 +44,25 @@
             <!-- create the Cards -->
         </section>
     </main>
+<!-- 
+    <div class="basket-cart-image">
+    <div>
+        <img src="./online-marketing-images/photo-1491553895911-0055eca6402d.avif" alt="">
+    </div>
+    <div class="basket-cart-information">
+        <h3>Nike</h3>
+        <h4>Sport</h4>
+        <h6>45.99$</h6>
+        <p>Available - with you in 3-4 working days</p>
+        <form action="">
+            <select name="product select" id="product-select">
+                <option value="">1</option>
+                <option value="">2</option>
+            </select>
+            <button>delete</button>
+        </form>
+    </div>
+</div> -->
 
 
     <script src="main.js"></script>

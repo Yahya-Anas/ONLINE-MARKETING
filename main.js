@@ -1,78 +1,218 @@
-const creatCard = document.getElementById("creat-card");
+const modal = document.getElementById("myModal");
 
-let cardArray = [
-    {image: 'src="./online-marketing-images/photo-1621951753015-740c699ab970.avif" alt=""',
-    barnd: 'Pavillon',
-    model: 'T-shirt',
-    price: '23.99 $'
+const creatCard = document.getElementById("creat-card");
+const shoppingBasket = document.getElementById("shopping-basket-count");
+const showOrder = document.getElementById("show-order");
+
+let cartArray = [
+    {
+        id: '1',
+        image: './online-marketing-images/photo-1621951753015-740c699ab970.avif',
+        alt: "",
+        barnd: 'Pavillon',
+        model: 'T-shirt',
+        price: '23.99 $',
+        items: '10',
+        select: 0
    },
   
-    {image: 'src="./online-marketing-images/photo-1581791538302-03537b9c97bf.avif" alt=""',
-    barnd: 'US-Polo',
-    model: 'Polo',
-    price: '30.99 $'
+    {
+        id: '2',
+        image: './online-marketing-images/photo-1581791538302-03537b9c97bf.avif',
+        alt: "",
+        barnd: 'US-Polo',
+        model: 'Polo',
+        price: '30.99 $',
+        items: '10',
+        select: 0
    },
-    {image: 'src="./online-marketing-images/photo-1521572163474-6864f9cf17ab.avif" alt=""',
-    barnd: 'Puma',
-    model: 'T-shirt',
-     price: '19.99 $'
+    {
+        id: '3',
+        image: './online-marketing-images/photo-1521572163474-6864f9cf17ab.avif',
+        alt: "",
+        barnd: 'Puma',
+        model: 'T-shirt',
+        price: '19.99 $',
+        items: '10',
+        select: 0
     },
   
-    {image: 'src="./online-marketing-images/photo-1592878904946-b3cd8ae243d0.avif" alt=""',
-    barnd: 'Suitsupply',
-    model: 'Suit Jacket',
-     price: '50.99 $'
+    {
+        id: '4',
+        image: './online-marketing-images/photo-1592878904946-b3cd8ae243d0.avif',
+        alt: "",
+        barnd: 'Suitsupply',
+        model: 'Suit Jacket',
+        price: '50.99 $',
+        items: '10',
+        select: 0
     },
-    {image: 'src="./online-marketing-images/photo-1592878940526-0214b0f374f6.avif" alt=""',
-    barnd: 'Valentino',
-    model: 'Suit Jacket',
-     price: '50.99 $'
+    {
+        id: '5',
+        image: './online-marketing-images/photo-1592878940526-0214b0f374f6.avif',
+        alt: "",
+        barnd: 'Valentino',
+        model: 'Suit Jacket',
+        price: '50.99 $',
+        items: '8',
+        select: 0
     },
-    {image: 'src="./online-marketing-images/photo-1598033032288-bff28b437218.avif" alt=""',
-    barnd: 'Prada',
-    model: 'Suit Jacket',
-     price: '50.99 $'
+    {
+        id: '6',
+        image: './online-marketing-images/photo-1598033032288-bff28b437218.avif',
+        alt: "",
+        barnd: 'Prada',
+        model: 'Suit Jacket',
+        price: '50.99 $',
+        items: '7',
+        select: 0
     },
-    {image: 'src="./online-marketing-images/photo-1491553895911-0055eca6402d.avif" alt=""',
-    barnd: 'Nike',
-    model: 'Sport',
-    price: '45.99 $'
+    {
+        id: '7',
+        image: './online-marketing-images/photo-1491553895911-0055eca6402d.avif',
+        alt: "",
+        barnd: 'Nike',
+        model: 'Sport',
+        price: '45.99 $',
+        items: '3',
+        select: 0
    },
-    {image: 'src="./online-marketing-images/photo-1600185652960-c9d8869d015c.avif" alt=""',
-    barnd: 'Nike',
-    model: 'Sport',
-     price: '55.99 $'
+    {
+        id: '8',
+        image: './online-marketing-images/photo-1600185652960-c9d8869d015c.avif',
+        alt: "",
+        barnd: 'Nike',
+        model: 'Sport',
+        price: '55.99 $',
+        items: '7',
+        select: 0
     },
-    {image: 'src="./online-marketing-images/photo-1605034313761-73ea4a0cfbf3.avif" alt=""',
-    barnd: 'Puma',
-    model: 'Casual',
-     price: '25.99 $'
+    {
+        id: '9',
+        image: './online-marketing-images/photo-1605034313761-73ea4a0cfbf3.avif',
+        alt: "",
+        barnd: 'Puma',
+        model: 'Casual',
+        price: '25.99 $',
+        items: '6',
+        select: 0
     },
-    {image: 'src="./online-marketing-images/photo-1630167146816-e1f4ff99c00c.avif" alt=""',
-    barnd: 'Lacost',
-    model: 'Check-Shirt',
-     price: '15.99 $'
+    {
+        id: '10',
+        image: './online-marketing-images/photo-1630167146816-e1f4ff99c00c.avif',
+        alt: "",
+        barnd: 'Lacost',
+        model: 'Check-Shirt',
+        price: '15.99 $',
+        items: '10',
+        select: 0
     },
   
 ]
 
+
+let basketArray = [];
+
+
+
 let creatCards = () =>{
     let cardInformation = ""
-    for(let i = 0; i < cardArray.length; i++){
-        cardInformation +='<div class="packet-information">' +
-        '<img '+ cardArray[i].image +'>'+
-        '<div class="clothes-information">' +
-        '<h3>'+cardArray[i].barnd+'</h3>' +
-        '<h2>'+cardArray[i].model+'</h2>' +
-        '<h3>'+cardArray[i].price+'</h3>' +
-        '<button>+ Add to card</button>'+
-        '</div>'+
-        '</div>'; 
+    for(let i = 0; i < cartArray.length; i++){
+        if(`${cartArray[i].items}` > 0){
+            cardInformation +=`<div class="packet-information">
+            <img src="${cartArray[i].image}" alt="${cartArray[i].alt}">
+            <div class="clothes-information">
+                <h3>${cartArray[i].barnd}</h3>
+                <h2>${cartArray[i].model}</h2>
+                <h3>${cartArray[i].price}</h3>
+                <button id="${cartArray[i].id}" onclick="createBasket(event)">+ Add to card</button>
+            </div>
+        </div>`; 
     }
+        }
+      
     creatCard.innerHTML = cardInformation;
    
 }
 
+
+//console.log(event.srcElement.id);
+let count = 0;
+let putItemsInBasket;
+let selectCount = 0;
+
+
+
+const createBasket = (event) => {
+
+    putItemsInBasket = cartArray[event.target.id-1].items;
+    cartArray[event.target.id-1].select += 1;
+    selectCount = cartArray[event.target.id-1].select;
+    console.log(selectCount)
+    console.log(putItemsInBasket)
+        if ( putItemsInBasket >= selectCount){
+            basketArray.push(cartArray[event.target.id-1]) 
+            // basketArray[event.target.id-1].items = exam1;
+            console.log(basketArray)
+        }
+      
+        shoppingBasket.innerText = count + 1;
+        count =count + 1;
+  }
+
+let createOrder = ()=>{
+    modal.style.display = "block";
+    let orderInformation = "";
+    if(count === 0){
+        orderInformation +=
+        `<div>
+            <h3>Your Cart is empty</h3>
+        </div>`; 
+    }
+    showOrder.innerHTML = orderInformation;
+
+    let uniq = basketArray.filter((e, index) => {
+        return basketArray.indexOf(e) === index;
+    });
+    console.log(uniq)
+
+    for(let i = 0; i < uniq.length; i++){
+        
+            orderInformation +=`<div class="basket-cart-image">
+            <div>
+                <img src="${uniq[i].image}" alt="${uniq[i].alt}">
+            </div>
+            <div class="basket-cart-information">
+                <h3>${uniq[i].barnd}</h3>
+                <h4>${uniq[i].model}</h4>
+                <h5>${uniq[i].price}</h5>
+                <p>Available - with you in 3-4 working days</p>
+                <form action="">
+                    <select name="product select" id="product-select">
+                        <option value="">${uniq[i].select}</option>
+                    </select>
+                    <button>delete</button>
+                </form>
+            </div>
+        </div>`; 
+       
+    showOrder.innerHTML = orderInformation;
+}
+}
+
+let closeModal = () =>{
+    modal.style.display="none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
 creatCards();
+
+
 
     

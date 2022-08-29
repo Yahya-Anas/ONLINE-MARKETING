@@ -4,6 +4,58 @@
     box-sizing: border-box;
 }
 
+.modal {
+     display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  /* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.basket-cart-image {
+    display: flex;
+    width: 500px;
+}  
+
+.basket-cart-image img{
+    width: 200px;
+    height: 200px;
+}
+
+.basket-cart-information{
+    margin: auto;
+}
+
+
 .header-container{
     display: flex;
     justify-content: center;
@@ -44,14 +96,42 @@
 }
 
 .packet-information{
-    width: 502px;
-    padding-top: 20px;
+    width: 25%;
+    padding: .5rem;
+}
+
+.packet-information img{
+    width: 100%;
+    
 }
 
 section{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    width: 80%;
+    margin: auto;
+    padding: 0.5rem;
 
 }
+
+.shopping-basket-icon{
+    width: 30px;
+}
+
+.shopping-basket-count{
+    color: #212a31;
+    size: 20px;
+}
+.shopping-basket{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    /* display: flex;
+    justify-content: end;
+    padding-top: 10px;
+    padding-right: 20px; */
+}
+
