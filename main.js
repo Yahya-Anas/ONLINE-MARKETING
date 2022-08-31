@@ -216,10 +216,6 @@ let createOrder = ()=>{
 
 let increment = (clicked_id) =>{
     
-    // const itemsCount = document.getElementById("items-count");
-    // let dataAttribute = itemsCount.getAttribute('my-data');
-    // count1 = Number(count1) + 1;
-
     let incrementIndex = basketArray.findIndex((e, index) => {
         return e.id === clicked_id;
     });
