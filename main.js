@@ -1,44 +1,49 @@
 const modal = document.getElementById("myModal");
-
 const creatCard = document.getElementById("creat-card");
 const shoppingBasket = document.getElementById("shopping-basket-count");
 const showOrder = document.getElementById("show-order");
 
+
+
+
 let cartArray = [
     {
-        id: '1',
+        id: '10',
         image: './online-marketing-images/photo-1621951753015-740c699ab970.avif',
         alt: "",
         barnd: 'Pavillon',
         model: 'T-shirt',
         price: '23.99 $',
         items: '10',
+        key: '1',
         select: 0
    },
   
     {
-        id: '2',
+        id: '12',
         image: './online-marketing-images/photo-1581791538302-03537b9c97bf.avif',
         alt: "",
         barnd: 'US-Polo',
         model: 'Polo',
         price: '30.99 $',
         items: '10',
+        key: '2',
         select: 0
    },
     {
-        id: '3',
+        id: '13',
         image: './online-marketing-images/photo-1521572163474-6864f9cf17ab.avif',
         alt: "",
         barnd: 'Puma',
         model: 'T-shirt',
         price: '19.99 $',
         items: '10',
+        key: '3',
         select: 0
     },
   
     {
-        id: '4',
+        id: '14',
         image: './online-marketing-images/photo-1592878904946-b3cd8ae243d0.avif',
         alt: "",
         barnd: 'Suitsupply',
@@ -48,7 +53,7 @@ let cartArray = [
         select: 0
     },
     {
-        id: '5',
+        id: '15',
         image: './online-marketing-images/photo-1592878940526-0214b0f374f6.avif',
         alt: "",
         barnd: 'Valentino',
@@ -58,7 +63,7 @@ let cartArray = [
         select: 0
     },
     {
-        id: '6',
+        id: '16',
         image: './online-marketing-images/photo-1598033032288-bff28b437218.avif',
         alt: "",
         barnd: 'Prada',
@@ -68,7 +73,7 @@ let cartArray = [
         select: 0
     },
     {
-        id: '7',
+        id: '17',
         image: './online-marketing-images/photo-1491553895911-0055eca6402d.avif',
         alt: "",
         barnd: 'Nike',
@@ -78,7 +83,7 @@ let cartArray = [
         select: 0
    },
     {
-        id: '8',
+        id: '18',
         image: './online-marketing-images/photo-1600185652960-c9d8869d015c.avif',
         alt: "",
         barnd: 'Nike',
@@ -88,7 +93,7 @@ let cartArray = [
         select: 0
     },
     {
-        id: '9',
+        id: '19',
         image: './online-marketing-images/photo-1605034313761-73ea4a0cfbf3.avif',
         alt: "",
         barnd: 'Puma',
@@ -98,7 +103,7 @@ let cartArray = [
         select: 0
     },
     {
-        id: '10',
+        id: '20',
         image: './online-marketing-images/photo-1630167146816-e1f4ff99c00c.avif',
         alt: "",
         barnd: 'Lacost',
@@ -112,8 +117,7 @@ let cartArray = [
 
 
 let basketArray = [];
-
-
+let uniq = [];
 
 let creatCards = () =>{
     let cardInformation = ""
@@ -142,63 +146,105 @@ let putItemsInBasket;
 let selectCount = 0;
 
 
-
 const createBasket = (event) => {
 
-    putItemsInBasket = cartArray[event.target.id-1].items;
-    cartArray[event.target.id-1].select += 1;
-    selectCount = cartArray[event.target.id-1].select;
-    console.log(selectCount)
-    console.log(putItemsInBasket)
-        if ( putItemsInBasket >= selectCount){
-            basketArray.push(cartArray[event.target.id-1]) 
+    const index = cartArray.findIndex(el => el.id === event.target.id);
+    if(index === -1) return;
+    if(cartArray[index].items === cartArray[index].select) return;
+    putItemsInBasket = cartArray[index].items;
+    cartArray[index].select += 1;
+    selectCount = cartArray[index].select;
+        if ( selectCount === 1){
+            basketArray.push(cartArray[index]) 
             // basketArray[event.target.id-1].items = exam1;
-            console.log(basketArray)
         }
-      
-        shoppingBasket.innerText = count + 1;
         count =count + 1;
-  }
+        shoppingBasket.innerText = count;       
+}
+
 
 let createOrder = ()=>{
     modal.style.display = "block";
     let orderInformation = "";
-    if(count === 0){
-        orderInformation +=
+    if(basketArray.length === 0){
+        showOrder.innerHTML =
         `<div>
             <h3>Your Cart is empty</h3>
         </div>`; 
+        return;
     }
-    showOrder.innerHTML = orderInformation;
 
-    let uniq = basketArray.filter((e, index) => {
-        return basketArray.indexOf(e) === index;
+        // let uniq = basketArray.filter((e, index) => {
+        //     return basketArray.indexOf(e) === index;
+        // });
+
+    for(let i = 0; i < basketArray.length; i++){
+        orderInformation +=
+                `<div id="basket-cart" class="basket-cart-image">
+                    <div>
+                        <img src="${basketArray[i].image}" alt="${basketArray[i].alt}">
+                    </div>
+                    <div class="basket-cart-information">
+                        <h3>${basketArray[i].barnd}</h3>
+                        <h4>${basketArray[i].model}</h4>
+                        <h5>${basketArray[i].price}</h5>
+                        <p>Available - with you in 3-4 working days</p>
+                        <div class="select-count-product">
+                            <button id=${basketArray[i].id} onclick="decrement(this.id)">-</button>
+                            <p id="items-count" my-data=${basketArray[i].select}>${basketArray[i].select}</p>
+                            <button id=${basketArray[i].id} onclick="increment(this.id)">+</button>
+                            <button id=${basketArray[i].id} onclick="deleteOrder(this.id)">Delete</button>
+                        </div>
+                    </div>
+                </div>`;   
+        showOrder.innerHTML = orderInformation;
+    }
+}
+ let deleteOrder = (clicked_id) =>{
+    
+    let deletedIndex = basketArray.findIndex((e, index) => {
+        return e.id === clicked_id;
     });
-    console.log(uniq)
+    count -= basketArray[deletedIndex].select
+    basketArray[deletedIndex].select = 0;
+    basketArray.splice(deletedIndex ,1);
+    createOrder();
+    shoppingBasket.innerText = count;
+}
 
-    for(let i = 0; i < uniq.length; i++){
-        
-            orderInformation +=`<div class="basket-cart-image">
-            <div>
-                <img src="${uniq[i].image}" alt="${uniq[i].alt}">
-            </div>
-            <div class="basket-cart-information">
-                <h3>${uniq[i].barnd}</h3>
-                <h4>${uniq[i].model}</h4>
-                <h5>${uniq[i].price}</h5>
-                <p>Available - with you in 3-4 working days</p>
-                <form action="">
-                    <select name="product select" id="product-select">
-                        <option value="">${uniq[i].select}</option>
-                    </select>
-                    <button>delete</button>
-                </form>
-            </div>
-        </div>`; 
-       
-    showOrder.innerHTML = orderInformation;
+
+
+let increment = (clicked_id) =>{
+    
+    // const itemsCount = document.getElementById("items-count");
+    // let dataAttribute = itemsCount.getAttribute('my-data');
+    // count1 = Number(count1) + 1;
+
+    let incrementIndex = basketArray.findIndex((e, index) => {
+        return e.id === clicked_id;
+    });
+
+    count += 1;
+    basketArray[incrementIndex].select +=1;
+    createOrder();
+    shoppingBasket.innerText = count;
+
+} 
+
+let decrement = (clicked_id) =>{
+    let decrementIndex = basketArray.findIndex((e, index) => {
+        return e.id === clicked_id;
+    });
+
+    count -= 1;
+    basketArray[decrementIndex].select -=1;
+    createOrder();
+    shoppingBasket.innerText = count;
 }
-}
+
+
+
+
 
 let closeModal = () =>{
     modal.style.display="none";
@@ -215,4 +261,13 @@ creatCards();
 
 
 
-    
+          // <form action="">
+                //     <select name="product select" id="product-select">
+                //         <option value="">${uniq[i].select}</option>
+                //     </select>
+                //     <button>delete</button>
+                // </form>
+
+
+
+               
