@@ -9,16 +9,26 @@
 </head>
 <body>
     <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
           <div id="show-order">
-           
+           <!-- show order -->
           </div>
         </div>
-      
-      </div>
+    </div>
+
+    <div id="message-modal" class="message-modal">
+        <!-- Modal content -->
+        <div class="message-modal-content">
+          <span class="close" onclick="closeMessageModal()">&times;</span>
+          <div id="message-order" class="message-order">
+            
+            <!-- <button id="no-btn" onclick="closeMessageModal()">No</button>
+            <button id="yes-btn" onclick="deleteOrder(clicked_id)">Yes</button> -->
+           </div>
+        </div>
+    </div>
 
      <div class="shopping-basket" onclick="createOrder()">
         <img src="./online-marketing-images/basket-shopping-solid.svg" class="shopping-basket-icon" id="btn-modal">
@@ -41,28 +51,9 @@
         <h2>New Products</h2>
         
         <section id="creat-card" onload="creatCards()">
-            <!-- create the Cards -->
+            <!-- create the Carts -->
         </section>
     </main>
-<!-- 
-    <div class="basket-cart-image">
-    <div>
-        <img src="./online-marketing-images/photo-1491553895911-0055eca6402d.avif" alt="">
-    </div>
-    <div class="basket-cart-information">
-        <h3>Nike</h3>
-        <h4>Sport</h4>
-        <h6>45.99$</h6>
-        <p>Available - with you in 3-4 working days</p>
-        <form action="">
-            <select name="product select" id="product-select">
-                <option value="">1</option>
-                <option value="">2</option>
-            </select>
-            <button>delete</button>
-        </form>
-    </div>
-</div> -->
 
 
 

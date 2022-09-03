@@ -1,7 +1,9 @@
 const modal = document.getElementById("myModal");
+const messeageModal = document.getElementById("message-modal");
 const creatCard = document.getElementById("creat-card");
 const shoppingBasket = document.getElementById("shopping-basket-count");
 const showOrder = document.getElementById("show-order");
+const messeageOrder = document.getElementById("message-order");
 
 
 
@@ -13,7 +15,7 @@ let cartArray = [
         alt: "",
         barnd: 'Pavillon',
         model: 'T-shirt',
-        price: '23.99 $',
+        price: '23.99',
         items: '10',
         key: '1',
         select: 0
@@ -25,7 +27,7 @@ let cartArray = [
         alt: "",
         barnd: 'US-Polo',
         model: 'Polo',
-        price: '30.99 $',
+        price: '30.99',
         items: '10',
         key: '2',
         select: 0
@@ -36,7 +38,7 @@ let cartArray = [
         alt: "",
         barnd: 'Puma',
         model: 'T-shirt',
-        price: '19.99 $',
+        price: '19.99',
         items: '10',
         key: '3',
         select: 0
@@ -48,7 +50,7 @@ let cartArray = [
         alt: "",
         barnd: 'Suitsupply',
         model: 'Suit Jacket',
-        price: '50.99 $',
+        price: '50.99',
         items: '10',
         select: 0
     },
@@ -58,7 +60,7 @@ let cartArray = [
         alt: "",
         barnd: 'Valentino',
         model: 'Suit Jacket',
-        price: '50.99 $',
+        price: '50.99',
         items: '8',
         select: 0
     },
@@ -68,7 +70,7 @@ let cartArray = [
         alt: "",
         barnd: 'Prada',
         model: 'Suit Jacket',
-        price: '50.99 $',
+        price: '50.99',
         items: '7',
         select: 0
     },
@@ -78,7 +80,7 @@ let cartArray = [
         alt: "",
         barnd: 'Nike',
         model: 'Sport',
-        price: '45.99 $',
+        price: '45.99',
         items: '3',
         select: 0
    },
@@ -88,7 +90,7 @@ let cartArray = [
         alt: "",
         barnd: 'Nike',
         model: 'Sport',
-        price: '55.99 $',
+        price: '55.99',
         items: '7',
         select: 0
     },
@@ -98,7 +100,7 @@ let cartArray = [
         alt: "",
         barnd: 'Puma',
         model: 'Casual',
-        price: '25.99 $',
+        price: '25.99',
         items: '6',
         select: 0
     },
@@ -108,7 +110,7 @@ let cartArray = [
         alt: "",
         barnd: 'Lacost',
         model: 'Check-Shirt',
-        price: '15.99 $',
+        price: '15.99',
         items: '10',
         select: 0
     },
@@ -187,7 +189,7 @@ let createOrder = ()=>{
                     <div class="basket-cart-information">
                         <h3>${basketArray[i].barnd}</h3>
                         <h4>${basketArray[i].model}</h4>
-                        <h5>${basketArray[i].price}</h5>
+                        <h5>${(Number(basketArray[i].price) * basketArray[i].select).toFixed(2)} $</h5>
                         <p>Available - with you in 3-4 working days</p>
                         <div class="select-count-product">
                             <button id=${basketArray[i].id} onclick="decrement(this.id)">-</button>
@@ -210,6 +212,15 @@ let createOrder = ()=>{
     basketArray.splice(deletedIndex ,1);
     createOrder();
     shoppingBasket.innerText = count;
+    if(clicked_id){
+        messeageModal.style.display = "none";
+       
+    }
+    if(count === 0){
+        shoppingBasket.innerText = "";
+    }
+    
+   
 }
 
 
@@ -224,26 +235,34 @@ let increment = (clicked_id) =>{
     basketArray[incrementIndex].select +=1;
     createOrder();
     shoppingBasket.innerText = count;
-
 } 
 
 let decrement = (clicked_id) =>{
     let decrementIndex = basketArray.findIndex((e, index) => {
         return e.id === clicked_id;
+       
     });
-
-    count -= 1;
-    basketArray[decrementIndex].select -=1;
-    createOrder();
-    shoppingBasket.innerText = count;
+   
+    if(basketArray[decrementIndex].select === 1){
+        messeageModal.style.display = "block";
+        messeageOrder.innerHTML = `<p>Would you like to remove this item from your shopping cart?</p>
+                                    <button  onclick="closeMessageModal()">No</button>
+                                    <button id=${clicked_id}  onclick="deleteOrder(this.id)">Yes</button>`;                        
+    }else{
+        count -= 1;
+        basketArray[decrementIndex].select -=1;
+        createOrder();
+        shoppingBasket.innerText = count;
+    }   
 }
-
-
-
 
 
 let closeModal = () =>{
     modal.style.display="none";
+}
+
+let closeMessageModal = () =>{
+    messeageModal.style.display="none";
 }
 
 window.onclick = function(event) {
@@ -254,15 +273,6 @@ window.onclick = function(event) {
 
 
 creatCards();
-
-
-
-          // <form action="">
-                //     <select name="product select" id="product-select">
-                //         <option value="">${uniq[i].select}</option>
-                //     </select>
-                //     <button>delete</button>
-                // </form>
 
 
 
