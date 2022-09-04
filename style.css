@@ -23,7 +23,7 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 45%;
   }
 
   /* The Close Button */
@@ -192,3 +192,11 @@ section{
     margin-top: 10px;
 }
 
+.total-price{
+    display: flex;
+    justify-content: end;
+}
+
+.total-price p {
+    color: red;
+}

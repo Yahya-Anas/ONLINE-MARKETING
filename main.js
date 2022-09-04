@@ -4,6 +4,8 @@ const creatCard = document.getElementById("creat-card");
 const shoppingBasket = document.getElementById("shopping-basket-count");
 const showOrder = document.getElementById("show-order");
 const messeageOrder = document.getElementById("message-order");
+const totalPrice = document.getElementById("total-price");
+const totalPriceContainer = document.getElementById("total-price-container");
 
 
 
@@ -161,18 +163,23 @@ const createBasket = (event) => {
             // basketArray[event.target.id-1].items = exam1;
         }
         count =count + 1;
-        shoppingBasket.innerText = count;       
+        shoppingBasket.innerText = count;   
+        totalPriceContainer.style.display = "block"    
 }
 
 
 let createOrder = ()=>{
     modal.style.display = "block";
     let orderInformation = "";
+    let sumPrice = 0;
     if(basketArray.length === 0){
+        sumPrice = 0;
         showOrder.innerHTML =
         `<div>
             <h3>Your Cart is empty</h3>
         </div>`; 
+        // totalPrice.innerText = sumPrice;
+        totalPriceContainer.style.display = "none";
         return;
     }
 
@@ -181,6 +188,8 @@ let createOrder = ()=>{
         // });
 
     for(let i = 0; i < basketArray.length; i++){
+       
+        let productPrice = Number(basketArray[i].price) * basketArray[i].select;
         orderInformation +=
                 `<div id="basket-cart" class="basket-cart-image">
                     <div>
@@ -189,7 +198,7 @@ let createOrder = ()=>{
                     <div class="basket-cart-information">
                         <h3>${basketArray[i].barnd}</h3>
                         <h4>${basketArray[i].model}</h4>
-                        <h5>${(Number(basketArray[i].price) * basketArray[i].select).toFixed(2)} $</h5>
+                        <h5>${productPrice.toFixed(2)} $</h5>
                         <p>Available - with you in 3-4 working days</p>
                         <div class="select-count-product">
                             <button id=${basketArray[i].id} onclick="decrement(this.id)">-</button>
@@ -200,7 +209,13 @@ let createOrder = ()=>{
                     </div>
                 </div>`;   
         showOrder.innerHTML = orderInformation;
+        sumPrice = productPrice + sumPrice;
     }
+    
+    console.log(sumPrice)
+    totalPrice.innerText = sumPrice.toFixed(2)+'$';
+
+
 }
  let deleteOrder = (clicked_id) =>{
     
