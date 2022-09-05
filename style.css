@@ -4,6 +4,27 @@
     box-sizing: border-box;
 }
 
+.main-nav{
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0%);
+    padding-left: 75%;
+}
+
+.nav-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-container li{
+    display: inline-block;
+}
+
+.nav-container a{
+    color: #000;
+}
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -54,6 +75,10 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
+
+  main{
+    text-align: center;
+  } 
 
   .message-modal-content {
     background-color: #fefefe;
@@ -138,7 +163,7 @@ section{
 }
 
 .shopping-basket-icon{
-    width: 30px;
+    width: 25px;
 }
 
 .shopping-basket-count{
@@ -146,11 +171,11 @@ section{
     size: 20px;
 }
 .shopping-basket{
-    position: fixed;
+    /* position: fixed;
     bottom: 0;
     right: 0;
     padding-right: 20px;
-    padding-bottom: 10px;
+    padding-bottom: 10px; */
     /* display: flex;
     justify-content: end;
     padding-top: 10px;
