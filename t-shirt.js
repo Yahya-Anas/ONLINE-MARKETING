@@ -6,7 +6,6 @@ const showOrder = document.getElementById("show-order");
 const messeageOrder = document.getElementById("message-order");
 const totalPrice = document.getElementById("total-price");
 const totalPriceContainer = document.getElementById("total-price-container");
-const creatCard1 = document.getElementById("creat-card1");
 
 
 
@@ -385,27 +384,35 @@ let cartArray = [
 let basketArray = [];
 let uniq = [];
 
-let creatCards = (cartArray, num) =>{
-
-    const randomArray = [...cartArray].sort(() => 0.5 - Math.random());
+let creatCards = () =>{
+    // const randomArray = [...cartArray].sort(() => 0.5 - Math.random());
     
-    const randomNumberLength = randomArray.slice(0, num)
-    //console.log(randomNumberLength.slice(0, num).length)
+    // const randomNumberLength = randomArray.slice(0, num)
+    // console.log(randomNumberLength.slice(0, num).length)
     let cardInformation = ""
-    for(let i = 0; i < randomNumberLength.length; i++){
-        if(`${randomNumberLength[i].items}` > 0){
-            cardInformation +=`<div class="packet-information">
-            <img src="${randomNumberLength[i].image}" alt="${randomNumberLength[i].alt}">
-            <div class="clothes-information">
-                <h3>${randomNumberLength[i].barnd}</h3>
-                <h3>${randomNumberLength[i].price} $</h3>
-                <button id="${randomNumberLength[i].id}" onclick="createBasket(event)">+ Add to card</button>
-            </div>
-        </div>`; 
-        }
-    } 
-    creatCard.innerHTML = cardInformation;
+   // console.log(cartArray[0].model)
+        for(let i = 0; i < cartArray.length; i++){
+            if(cartArray[i].model === 'T-shirt' || cartArray[i].model === 'Polo'){
+                if(`${cartArray[i].items}` > 0){
+                    cardInformation +=`<div class="packet-information">
+                    <img src="${cartArray[i].image}" alt="${cartArray[i].alt}">
+                    <div class="clothes-information">
+                        <h3>${cartArray[i].barnd}</h3>
+                        <h3>${cartArray[i].price} $</h3>
+                        <button id="${cartArray[i].id}" onclick="createBasket(event)">+ Add to card</button>
+                    </div>
+                </div>`; 
+                }
+            } 
+            creatCard.innerHTML = cardInformation;
+            }
+            
+      
+    
+
+   
 }
+
 
 //console.log(event.srcElement.id);
 let count = 0;
@@ -426,12 +433,10 @@ const createBasket = (event) => {
             // basketArray[event.target.id-1].items = exam1;
         }
         count =count + 1;
-        shoppingBasket.innerText = count;   
-        sessionStorage.setItem("count", shoppingBasket.innerText = count)
+        shoppingBasket.innerText = count;  
+        sessionStorage.getItem("count") 
         totalPriceContainer.style.display = "block"    
 }
-
-
 
 
 let createOrder = ()=>{
@@ -553,7 +558,8 @@ window.onclick = function(event) {
   }
 
 
-creatCards(cartArray,cartArray.length/2);
+
+creatCards();
 
 
 
